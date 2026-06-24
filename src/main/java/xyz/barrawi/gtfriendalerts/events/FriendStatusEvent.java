@@ -53,18 +53,19 @@ public class FriendStatusEvent implements EventListener {
 
         String message = Emulator.getTexts().getValue(textKey)
                 .replace("%username%", habbo.getHabboInfo().getUsername());
-        String bubbleKey = Emulator.getConfig().getValue("gtfriendalerts.bubble_key", "admin.transient");
+        String bubbleKey = Emulator.getConfig().getValue("gtfriendalerts.bubble_key", "gtfriendalerts");
         String imageUrl = Emulator.getConfig().getValue("gtfriendalerts.imager_url",
                 "https://imager.gthotel.org/?figure={figure}&headonly=1&direction=3&size=l")
                 .replace("{figure}", habbo.getHabboInfo().getLook());
 
+        THashMap<String, String> keys = new THashMap<>();
+        keys.put("display", "BUBBLE");
+        keys.put("image", imageUrl);
+        keys.put("message", message);
+
         for (MessengerBuddy buddy : messenger.getFriends().values()) {
             Habbo friend = Emulator.getGameEnvironment().getHabboManager().getHabbo(buddy.getId());
             if (friend != null && friend.getClient() != null) {
-                THashMap<String, String> keys = new THashMap<>();
-                keys.put("display", "BUBBLE");
-                keys.put("image", imageUrl);
-                keys.put("message", message);
                 friend.getClient().sendResponse(new BubbleAlertComposer(bubbleKey, keys));
             }
         }

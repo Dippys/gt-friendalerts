@@ -27,7 +27,7 @@ public class EmulatorLoadEvent implements EventListener {
     private static void loadConfig() {
         Emulator.getConfig().register("gtfriendalerts.login_alerts_enabled", "true");
         Emulator.getConfig().register("gtfriendalerts.logout_alerts_enabled", "true");
-        Emulator.getConfig().register("gtfriendalerts.bubble_key", "admin.transient");
+        Emulator.getConfig().register("gtfriendalerts.bubble_key", "gtfriendalerts");
         Emulator.getConfig().register("gtfriendalerts.imager_url",
                 "https://imager.gthotel.org/?figure={figure}&headonly=1&direction=3&size=l");
     }
