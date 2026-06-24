@@ -63,10 +63,12 @@ public class FriendStatusEvent implements EventListener {
         keys.put("image", imageUrl);
         keys.put("message", message);
 
+        BubbleAlertComposer alert = new BubbleAlertComposer(bubbleKey, keys);
+
         for (MessengerBuddy buddy : messenger.getFriends().values()) {
             Habbo friend = Emulator.getGameEnvironment().getHabboManager().getHabbo(buddy.getId());
             if (friend != null && friend.getClient() != null) {
-                friend.getClient().sendResponse(new BubbleAlertComposer(bubbleKey, keys));
+                friend.getClient().sendResponse(alert);
             }
         }
     }
